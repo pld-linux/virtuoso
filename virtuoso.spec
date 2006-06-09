@@ -54,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README
-%{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
 %{_prefix}/lib/im.a
 %{_prefix}/lib/im.la
 %{_prefix}/lib/im.so
