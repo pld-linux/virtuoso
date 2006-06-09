@@ -22,6 +22,22 @@ BuildRequires:	openssl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+Virtuoso is a scalable cross-platform server that combines SQL/RDF/XML
+Data Management with Web Application Server and Web Services Platform
+functionality.
+
+Virtuoso is at the core a high performance object-relational SQL
+database. As a database, it provides transactions, a smart SQL
+compiler, powerful stored procedure language with optional Java and
+.Net server side hosting, hot backup, SQL 99 and more. It has all
+major data access interfaces, as in ODBC, JDBC, ADO .Net and OLE/DB.
+
+Virtuoso has a built-in web server which can serve dynamic web pages
+written in Virtuoso's web page language as well as PHP, ASP .net and
+others. This same web server provides SOAP and REST access to Virtuoso
+stored procedures, supporting a broad set of WS protocols such as
+WS-Security, WS-Reliable Messaging and others. A BPEL4WS run time is
+also available as part of Virtuoso's SOA suite
 
 %prep
 %setup -q -n %{name}-opensource-%{version}
