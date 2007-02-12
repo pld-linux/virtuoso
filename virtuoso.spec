@@ -1,6 +1,6 @@
 # TODO: -devel/-static split(?), kill unneeded *.la/*.a
 Summary:	OpenLink Virtuoso Database System
-Summary(pl.UTF-8):   System baz danych OpenLink Virtuoso
+Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	4.5.3
 Release:	1
