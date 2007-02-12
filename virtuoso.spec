@@ -1,6 +1,6 @@
 # TODO: -devel/-static split(?), kill unneeded *.la/*.a
 Summary:	OpenLink Virtuoso Database System
-Summary(pl):	System baz danych OpenLink Virtuoso
+Summary(pl.UTF-8):   System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	4.5.3
 Release:	1
@@ -36,24 +36,24 @@ stored procedures, supporting a broad set of WS protocols such as
 WS-Security, WS-Reliable Messaging and others. A BPEL4WS run time is
 also available as part of Virtuoso's SOA suite.
 
-%description -l pl
-Virtuoso to skalowalny, wieloplatformowy serwer ³±cz±cy funkcjonalno¶æ
-zarz±dzania danymi SQL/RDF/XML z serwerem aplikacji WWW i platform±
-us³ug WWW.
+%description -l pl.UTF-8
+Virtuoso to skalowalny, wieloplatformowy serwer Å‚Ä…czÄ…cy funkcjonalnoÅ›Ä‡
+zarzÄ…dzania danymi SQL/RDF/XML z serwerem aplikacji WWW i platformÄ…
+usÅ‚ug WWW.
 
-Virtuoso opiera siê na wysoko wydajnej obiektowo-relacyjnej bazie
-danych SQL. Jako baza danych udostêpnia transakcje, inteligentny
-kompilator SQL, potê¿ny jêzyk procedur sk³adowanych z opcjonaln±
-obs³ug± Javy i .Net po stronie serwera, backup w czasie rzeczywistym,
-SQL 99 i inne. Ma wszystkie wa¿niejsze interfejsy dostêpu do danych,
+Virtuoso opiera siÄ™ na wysoko wydajnej obiektowo-relacyjnej bazie
+danych SQL. Jako baza danych udostÄ™pnia transakcje, inteligentny
+kompilator SQL, potÄ™Å¼ny jÄ™zyk procedur skÅ‚adowanych z opcjonalnÄ…
+obsÅ‚ugÄ… Javy i .Net po stronie serwera, backup w czasie rzeczywistym,
+SQL 99 i inne. Ma wszystkie waÅ¼niejsze interfejsy dostÄ™pu do danych,
 jak ODBC, JDBC, ADO .Net i OLE/DB.
 
-Virtuoso ma wbudowany serwer WWW, potrafi±cy obs³ugiwaæ dynamiczne
-strony napisane we w³asnym jêzyku Virtuoso, a tak¿e PHP, ASP .Net i
-innych. Serwer ten daje dostêp SOAP i REST do procedur sk³adowanych
-Virtuoso, obs³uguj±c szeroki zakres protoko³ów WS, takich jak
-WS-Security, WS-Reliable Messaging i inne. ¦rodowisko uruchomieniowe
-BPEL4WS jest tak¿e dostêpne jako czê¶æ pakietu Virtuoso SOA.
+Virtuoso ma wbudowany serwer WWW, potrafiÄ…cy obsÅ‚ugiwaÄ‡ dynamiczne
+strony napisane we wÅ‚asnym jÄ™zyku Virtuoso, a takÅ¼e PHP, ASP .Net i
+innych. Serwer ten daje dostÄ™p SOAP i REST do procedur skÅ‚adowanych
+Virtuoso, obsÅ‚ugujÄ…c szeroki zakres protokoÅ‚Ã³w WS, takich jak
+WS-Security, WS-Reliable Messaging i inne. Åšrodowisko uruchomieniowe
+BPEL4WS jest takÅ¼e dostÄ™pne jako czÄ™Å›Ä‡ pakietu Virtuoso SOA.
 
 %prep
 %setup -q -n %{name}-opensource-%{version}
