@@ -1,0 +1,72 @@
+diff -ur virtuoso-opensource-5.0.0-o/binsrc/samples/demo/Makefile.am virtuoso-opensource-5.0.0/binsrc/samples/demo/Makefile.am
+--- virtuoso-opensource-5.0.0-o/binsrc/samples/demo/Makefile.am	2007-04-01 12:38:49.000000000 -0600
++++ virtuoso-opensource-5.0.0/binsrc/samples/demo/Makefile.am	2007-04-12 13:11:11.000000000 -0600
+@@ -29,10 +29,10 @@
+ endif
+ 
+ install-data-local:
+-	mkdir -p "$(dbdir)"
+-	$(INSTALL_DATA) default.ini "$(dbdir)"/virtuoso.ini
+-	mkdir -p "$(htmldocdir)"
+-	$(INSTALL_DATA) $(top_srcdir)/docsrc/html_virt/*.html "$(htmldocdir)"
++	mkdir -p "$(DESTDIR)$(dbdir)"
++	$(INSTALL_DATA) default.ini "$(DESTDIR)$(dbdir)"/virtuoso.ini
++	mkdir -p "$(DESTDIR)$(htmldocdir)"
++	$(INSTALL_DATA) $(top_srcdir)/docsrc/html_virt/*.html "$(DESTDIR)$(htmldocdir)"
+ 
+ uninstall-local:
+ 	rm -f "$(dbdir)/virtuoso.ini"
+diff -ur virtuoso-opensource-5.0.0-o/binsrc/vsp/Makefile.am virtuoso-opensource-5.0.0/binsrc/vsp/Makefile.am
+--- virtuoso-opensource-5.0.0-o/binsrc/vsp/Makefile.am	2006-07-25 06:23:53.000000000 -0600
++++ virtuoso-opensource-5.0.0/binsrc/vsp/Makefile.am	2007-04-12 13:13:38.000000000 -0600
+@@ -24,20 +24,20 @@
+ #dist_httproot_DATA = *.html *.css *.txt
+ 
+ install-data-local:
+-	@echo Installing in "$(httprootdir)" 
+-	mkdir -p "$(httprootdir)"
+-	mkdir -p "$(httprootdir)"/images
+-	mkdir -p "$(httprootdir)"/admin
+-	$(INSTALL_DATA) *.html "$(httprootdir)"
+-	$(INSTALL_DATA) *.css "$(httprootdir)"
+-	$(INSTALL_DATA) *.txt "$(httprootdir)"
+-	$(INSTALL_DATA) admin/index_left.vsp "$(httprootdir)"/admin
+-	$(INSTALL_DATA) images/*.gif "$(httprootdir)"/images
+-	$(INSTALL_DATA) images/*.png "$(httprootdir)"/images
+-	$(INSTALL_DATA) images/*.jpg "$(httprootdir)"/images
++	@echo Installing in "$(DESTDIR)$(httprootdir)" 
++	mkdir -p "$(DESTDIR)$(httprootdir)"
++	mkdir -p "$(DESTDIR)$(httprootdir)"/images
++	mkdir -p "$(DESTDIR)$(httprootdir)"/admin
++	$(INSTALL_DATA) *.html "$(DESTDIR)$(httprootdir)"
++	$(INSTALL_DATA) *.css "$(DESTDIR)$(httprootdir)"
++	$(INSTALL_DATA) *.txt "$(DESTDIR)$(httprootdir)"
++	$(INSTALL_DATA) admin/index_left.vsp "$(DESTDIR)$(httprootdir)"/admin
++	$(INSTALL_DATA) images/*.gif "$(DESTDIR)$(httprootdir)"/images
++	$(INSTALL_DATA) images/*.png "$(DESTDIR)$(httprootdir)"/images
++	$(INSTALL_DATA) images/*.jpg "$(DESTDIR)$(httprootdir)"/images
+ 
+ uninstall-local:
+-	rm -rf "$(httprootdir)"/*
++	rm -rf "$(DESTDIR)$(httprootdir)"/*
+ 
+ 
+ # ----------------------------------------------------------------------
+diff -ur virtuoso-opensource-5.0.0-o/libsrc/JDBCDriverType4/Makefile.am virtuoso-opensource-5.0.0/libsrc/JDBCDriverType4/Makefile.am
+--- virtuoso-opensource-5.0.0-o/libsrc/JDBCDriverType4/Makefile.am	2006-04-11 11:56:16.000000000 -0600
++++ virtuoso-opensource-5.0.0/libsrc/JDBCDriverType4/Makefile.am	2007-04-12 13:15:01.000000000 -0600
+@@ -59,10 +59,10 @@
+ 	@cd virtuoso/jdbc2; $(MAKE) -$(MAKEFLAGS) ssl3
+ 
+ install-data-local:
+-	-mkdir ${libdir}/jdbc-2.0
+-	-mkdir ${libdir}/jdbc-3.0
+-	-cp virtjdbc2.jar virtjdbc2ssl.jar ${libdir}/jdbc-2.0
+-	-cp virtjdbc3.jar virtjdbc3ssl.jar ${libdir}/jdbc-3.0
++	-mkdir $(DESTDIR)${libdir}/jdbc-2.0
++	-mkdir $(DESTDIR)${libdir}/jdbc-3.0
++	-cp virtjdbc2.jar virtjdbc2ssl.jar $(DESTDIR)${libdir}/jdbc-2.0
++	-cp virtjdbc3.jar virtjdbc3ssl.jar $(DESTDIR)${libdir}/jdbc-3.0
+ 
+ uninstall-local:
+ 	-rm -rf ${libdir}/jdbc-2.0
