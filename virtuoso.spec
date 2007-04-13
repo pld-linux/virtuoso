@@ -2,12 +2,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	4.5.3
+Version:	5.0.0
 Release:	1
-License:	- (enter GPL/GPL v2/LGPL/BSD/BSD-like/other license name here)
+License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	48f0cf9cd9881b2600a3510fe08d4467
+# Source0-md5:	de06b0ab648a4ab6d2e3a16e5ab75932
 Patch0:		%{name}-destdir.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	autoconf
@@ -84,24 +84,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/im.a
 %{_libdir}/im.la
 %attr(755,root,root) %{_libdir}/im.so
-%{_libdir}/jdbc-2.0/virtjdbc2.jar
-%{_libdir}/jdbc-2.0/virtjdbc2ssl.jar
-%{_libdir}/jdbc-3.0/virtjdbc3.jar
-%{_libdir}/jdbc-3.0/virtjdbc3ssl.jar
 %{_libdir}/libvirtuoso-t.a
 %{_libdir}/libvirtuoso-t.la
-%{_libdir}/virtodbc32.a
-%{_libdir}/virtodbc32.la
-%attr(755,root,root) %{_libdir}/virtodbc32.so
-%{_libdir}/virtodbc32_r.a
-%{_libdir}/virtodbc32_r.la
-%attr(755,root,root) %{_libdir}/virtodbc32_r.so
-%{_libdir}/virtodbc32u.a
-%{_libdir}/virtodbc32u.la
-%attr(755,root,root) %{_libdir}/virtodbc32u.so
-%{_libdir}/virtodbc32u_r.a
-%{_libdir}/virtodbc32u_r.la
-%attr(755,root,root) %{_libdir}/virtodbc32u_r.so
+%{_libdir}/creolewiki.a
+%{_libdir}/creolewiki.la
+%attr(755,root,root) %{_libdir}/creolewiki.so
+%{_libdir}/mediawiki.a
+%{_libdir}/mediawiki.la
+%attr(755,root,root) %{_libdir}/mediawiki.so
+%{_libdir}/virtodbc.a
+%{_libdir}/virtodbc.la
+%attr(755,root,root) %{_libdir}/virtodbc.so
+%{_libdir}/virtodbc_r.a
+%{_libdir}/virtodbc_r.la
+%attr(755,root,root) %{_libdir}/virtodbc_r.so
+%{_libdir}/virtodbcu.a
+%{_libdir}/virtodbcu.la
+%attr(755,root,root) %{_libdir}/virtodbcu.so
+%{_libdir}/virtodbcu_r.a
+%{_libdir}/virtodbcu_r.la
+%attr(755,root,root) %{_libdir}/virtodbcu_r.so
 %dir %{_libdir}/virtuoso-opensource
 %{_libdir}/virtuoso-opensource/hosting_sample.a
 %{_libdir}/virtuoso-opensource/hosting_sample.la
