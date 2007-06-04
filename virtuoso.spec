@@ -2,12 +2,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	5.0.0
+Version:	5.0.1
 Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	de06b0ab648a4ab6d2e3a16e5ab75932
+# Source0-md5:	0c3f1281a2d5708ab34fdc2ba1f7e800
 Patch0:		%{name}-destdir.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	autoconf
