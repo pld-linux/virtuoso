@@ -2,13 +2,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	5.0.1
+Version:	6.0.0
 Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	0c3f1281a2d5708ab34fdc2ba1f7e800
-Patch0:		%{name}-destdir.patch
+# Source0-md5:	39b68d6c958ad36622ba4476e1ea5fd0
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -57,7 +56,6 @@ BPEL4WS jest także dostępne jako część pakietu Virtuoso SOA.
 
 %prep
 %setup -q -n %{name}-opensource-%{version}
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -66,12 +64,13 @@ BPEL4WS jest także dostępne jako część pakietu Virtuoso SOA.
 %{__autoheader}
 %{__automake}
 %configure
-%{__make}
+
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -80,18 +79,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README
+%doc docsrc/html_virt/*.{html,css,ico}
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/im.a
-%{_libdir}/im.la
-%attr(755,root,root) %{_libdir}/im.so
 %{_libdir}/libvirtuoso-t.a
 %{_libdir}/libvirtuoso-t.la
-%{_libdir}/creolewiki.a
-%{_libdir}/creolewiki.la
-%attr(755,root,root) %{_libdir}/creolewiki.so
-%{_libdir}/mediawiki.a
-%{_libdir}/mediawiki.la
-%attr(755,root,root) %{_libdir}/mediawiki.so
 %{_libdir}/virtodbc.a
 %{_libdir}/virtodbc.la
 %attr(755,root,root) %{_libdir}/virtodbc.so
@@ -104,23 +95,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/virtodbcu_r.a
 %{_libdir}/virtodbcu_r.la
 %attr(755,root,root) %{_libdir}/virtodbcu_r.so
-%dir %{_libdir}/virtuoso-opensource
-%{_libdir}/virtuoso-opensource/hosting_sample.a
-%{_libdir}/virtuoso-opensource/hosting_sample.la
-%attr(755,root,root) %{_libdir}/virtuoso-opensource/hosting_sample.so
-%{_libdir}/virtuoso-opensource/plugin_sample.a
-%{_libdir}/virtuoso-opensource/plugin_sample.la
-%attr(755,root,root) %{_libdir}/virtuoso-opensource/plugin_sample.so
-%{_libdir}/wikiv.a
-%{_libdir}/wikiv.la
-%attr(755,root,root) %{_libdir}/wikiv.so
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/hosting
+%attr(755,root,root) %{_libdir}/%{name}/hosting/creolewiki.so
+%attr(755,root,root) %{_libdir}/%{name}/hosting/im.so
+%attr(755,root,root) %{_libdir}/%{name}/hosting/mediawiki.so
+%attr(755,root,root) %{_libdir}/%{name}/hosting/wbxml2.so
+%attr(755,root,root) %{_libdir}/%{name}/hosting/wikiv.so
 %dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/doc
-%dir %{_datadir}/%{name}/doc/html
-%{_datadir}/%{name}/doc/html/*.html
 %dir %{_datadir}/%{name}/vad
 %{_datadir}/%{name}/vad/*.vad
 %dir /var/lib/%{name}
 /var/lib/%{name}/db
-/var/lib/%{name}/demo
 /var/lib/%{name}/vsp
