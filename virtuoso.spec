@@ -9,12 +9,17 @@ Group:		Applications
 Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	39b68d6c958ad36622ba4476e1ea5fd0
 URL:		http://virtuoso.openlinksw.com/
+BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
+BuildRequires:	gawk
 BuildRequires:	libtool
+BuildRequires:	libxml2-devel
+BuildRequires:	net-tools
 BuildRequires:	openssl-devel
+BuildRequires:	wbxml2-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,7 +68,8 @@ BPEL4WS jest także dostępne jako część pakietu Virtuoso SOA.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-static
 
 %{__make} -j1
 
@@ -80,21 +86,17 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README
 %doc docsrc/html_virt/*.{html,css,ico}
-%attr(755,root,root) %{_bindir}/*
-%{_libdir}/libvirtuoso-t.a
-%{_libdir}/libvirtuoso-t.la
-%{_libdir}/virtodbc.a
-%{_libdir}/virtodbc.la
+%attr(755,root,root) %{_bindir}/inifile
+%attr(755,root,root) %{_bindir}/isql
+%attr(755,root,root) %{_bindir}/isqlw
+%attr(755,root,root) %{_bindir}/virt_mail
+%attr(755,root,root) %{_bindir}/virtuoso-t
+
 %attr(755,root,root) %{_libdir}/virtodbc.so
-%{_libdir}/virtodbc_r.a
-%{_libdir}/virtodbc_r.la
 %attr(755,root,root) %{_libdir}/virtodbc_r.so
-%{_libdir}/virtodbcu.a
-%{_libdir}/virtodbcu.la
 %attr(755,root,root) %{_libdir}/virtodbcu.so
-%{_libdir}/virtodbcu_r.a
-%{_libdir}/virtodbcu_r.la
 %attr(755,root,root) %{_libdir}/virtodbcu_r.so
+
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/hosting
 %attr(755,root,root) %{_libdir}/%{name}/hosting/creolewiki.so
@@ -102,6 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/hosting/mediawiki.so
 %attr(755,root,root) %{_libdir}/%{name}/hosting/wbxml2.so
 %attr(755,root,root) %{_libdir}/%{name}/hosting/wikiv.so
+
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/vad
 %{_datadir}/%{name}/vad/*.vad
