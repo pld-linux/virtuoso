@@ -155,20 +155,21 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/%{name}/hosting
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/creolewiki.so
 %attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/im.so
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/mediawiki.so
 %attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wikiv.so
 
 %if %{with vad}
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/creolewiki.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/mediawiki.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wikiv.so
+
 %files vad
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/vad
 %{_datadir}/%{name}/vad/*.vad
-%endif
 
 %files doc
 %defattr(644,root,root,755)
 %doc docsrc/html_virt/*.{html,css,ico}
+%endif
