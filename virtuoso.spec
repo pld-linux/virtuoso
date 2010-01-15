@@ -1,12 +1,14 @@
-# TODO: -devel/-static split(?), kill unneeded *.la/*.a
+# NOTE:
+# - doesn't build if port 1111 is in use (virtuoso-t is started)
+%bcond_without	vad
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	6.0.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications
-Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	39b68d6c958ad36622ba4476e1ea5fd0
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
@@ -18,8 +20,11 @@ BuildRequires:	gawk
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
+BuildRequires:	net-tools
 BuildRequires:	openssl-devel
+BuildRequires:	readline-devel
 BuildRequires:	wbxml2-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -59,6 +64,30 @@ Virtuoso, obsługując szeroki zakres protokołów WS, takich jak
 WS-Security, WS-Reliable Messaging i inne. Środowisko uruchomieniowe
 BPEL4WS jest także dostępne jako część pakietu Virtuoso SOA.
 
+%package tools
+Summary:	Virtuoso tools
+Group:		Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description tools
+Virtuoso tools.
+
+%package plugins-hosting
+Summary:	Hosting plugins for virtuoso
+Group:		Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description plugins-hosting
+Hosting plugins for virtuoso.
+
+%package vad
+Summary:	VAD applications for virtuoso
+Group:		Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description vad
+VAD applications for virtuoso.
+
 %prep
 %setup -q -n %{name}-opensource-%{version}
 
@@ -69,6 +98,18 @@ BPEL4WS jest także dostępne jako część pakietu Virtuoso SOA.
 %{__autoheader}
 %{__automake}
 %configure \
+	--libdir=%{_libdir}/%{name} \
+	%{?!with_vad:--disable-all-vads} \
+	--enable-xml \
+	--enable-krb \
+	--enable-openssl \
+	--enable-openldap \
+	--enable-imagemagick \
+	--enable-wbxml2 \
+	--enable-aio \
+	--with-readline \
+	--without-internal-zlib \
+	--with-pthreads \
 	--disable-static
 
 %{__make} -j1
@@ -86,28 +127,39 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README
 %doc docsrc/html_virt/*.{html,css,ico}
+%attr(755,root,root) %{_bindir}/virtuoso-t
+
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/virtodbc.so
+%attr(755,root,root) %{_libdir}/%{name}/virtodbc_r.so
+%attr(755,root,root) %{_libdir}/%{name}/virtodbcu.so
+%attr(755,root,root) %{_libdir}/%{name}/virtodbcu_r.so
+
+%dir /var/lib/%{name}
+/var/lib/%{name}/db
+/var/lib/%{name}/vsp
+
+%files tools
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/inifile
 %attr(755,root,root) %{_bindir}/isql
 %attr(755,root,root) %{_bindir}/isqlw
 %attr(755,root,root) %{_bindir}/virt_mail
-%attr(755,root,root) %{_bindir}/virtuoso-t
 
-%attr(755,root,root) %{_libdir}/virtodbc.so
-%attr(755,root,root) %{_libdir}/virtodbc_r.so
-%attr(755,root,root) %{_libdir}/virtodbcu.so
-%attr(755,root,root) %{_libdir}/virtodbcu_r.so
-
+%files plugins-hosting
+%defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/hosting
-%attr(755,root,root) %{_libdir}/%{name}/hosting/creolewiki.so
-%attr(755,root,root) %{_libdir}/%{name}/hosting/im.so
-%attr(755,root,root) %{_libdir}/%{name}/hosting/mediawiki.so
-%attr(755,root,root) %{_libdir}/%{name}/hosting/wbxml2.so
-%attr(755,root,root) %{_libdir}/%{name}/hosting/wikiv.so
+%dir %{_libdir}/%{name}/%{name}/hosting
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/creolewiki.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/im.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/mediawiki.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so
+%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wikiv.so
 
+%if %{with vad}
+%files vad
+%defattr(644,root,root,755)
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/vad
 %{_datadir}/%{name}/vad/*.vad
-%dir /var/lib/%{name}
-/var/lib/%{name}/db
-/var/lib/%{name}/vsp
+%endif
