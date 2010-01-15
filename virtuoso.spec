@@ -5,7 +5,7 @@ Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	6.0.0
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
@@ -88,6 +88,13 @@ Requires:	%{name} = %{version}-%{release}
 %description vad
 VAD applications for virtuoso.
 
+%package doc
+Summary:	Virtuoso documentation
+Group:		Documentation
+
+%description doc
+Virtuoso documentation.
+
 %prep
 %setup -q -n %{name}-opensource-%{version}
 
@@ -126,7 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README
-%doc docsrc/html_virt/*.{html,css,ico}
 %attr(755,root,root) %{_bindir}/virtuoso-t
 
 %dir %{_libdir}/%{name}
@@ -163,3 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/vad
 %{_datadir}/%{name}/vad/*.vad
 %endif
+
+%files doc
+%defattr(644,root,root,755)
+%doc docsrc/html_virt/*.{html,css,ico}
