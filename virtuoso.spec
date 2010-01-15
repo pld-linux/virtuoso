@@ -5,7 +5,7 @@ Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	6.0.0
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
@@ -126,6 +126,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+ln -s . $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -135,6 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/virtuoso-t
 
 %dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/virtodbc.so
 %attr(755,root,root) %{_libdir}/%{name}/virtodbc_r.so
 %attr(755,root,root) %{_libdir}/%{name}/virtodbcu.so
