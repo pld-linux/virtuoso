@@ -105,7 +105,7 @@ Virtuoso documentation.
 %{__automake}
 %configure \
 	--libdir=%{_libdir}/%{name} \
-	%{?!with_vad:--disable-all-vads} \
+	%{!?with_vad:--disable-all-vads} \
 	--enable-xml \
 	--enable-krb \
 	--enable-openssl \
