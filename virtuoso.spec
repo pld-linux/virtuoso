@@ -20,7 +20,6 @@ BuildRequires:	gawk
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
-BuildRequires:	net-tools
 BuildRequires:	openssl-devel
 BuildRequires:	readline-devel
 BuildRequires:	wbxml2-devel
