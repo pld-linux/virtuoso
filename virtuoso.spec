@@ -8,7 +8,7 @@ Version:	6.0.0
 Release:	4
 License:	GPL v2
 Group:		Applications
-Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	39b68d6c958ad36622ba4476e1ea5fd0
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
@@ -137,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/virtuoso-t
 
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/plugins
+%{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/virtodbc.so
 %attr(755,root,root) %{_libdir}/%{name}/virtodbc_r.so
 %attr(755,root,root) %{_libdir}/%{name}/virtodbcu.so
