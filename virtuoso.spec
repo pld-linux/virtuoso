@@ -22,7 +22,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
 BuildRequires:	openssl-devel
 BuildRequires:	readline-devel
-BuildRequires:	wbxml2-devel
+BuildRequires:	libwbxml-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
