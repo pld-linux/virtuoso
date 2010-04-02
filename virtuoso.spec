@@ -1,6 +1,10 @@
 # NOTE:
-# - doesn't build if port 1111 is in use (virtuoso-t is started)
+# - building --with vad requires:
+#	- usable netstat 
+#	- unused port 1111 (used f.e. by virtuoso-t)
+#
 %bcond_without	vad
+#
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
