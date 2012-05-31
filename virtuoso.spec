@@ -1,6 +1,6 @@
 # NOTE:
 # - building --with vad requires:
-#	- usable netstat 
+#	- usable netstat
 #	- unused port 1111 (used f.e. by virtuoso-t)
 #	- many unpackaged files which should be removed or included in subpackages
 #
@@ -13,7 +13,7 @@ Version:	6.1.5
 Release:	1
 License:	GPL v2
 Group:		Applications
-Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	61b53395e14a11dd7e7715b50261b9eb
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
@@ -23,11 +23,11 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gawk
 BuildRequires:	libtool
+BuildRequires:	libwbxml-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
 BuildRequires:	openssl-devel
 BuildRequires:	readline-devel
-BuildRequires:	libwbxml-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
