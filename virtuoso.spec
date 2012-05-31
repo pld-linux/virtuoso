@@ -2,6 +2,7 @@
 # - building --with vad requires:
 #	- usable netstat 
 #	- unused port 1111 (used f.e. by virtuoso-t)
+#	- many unpackaged files which should be removed or included in subpackages
 #
 %bcond_without	vad
 #
