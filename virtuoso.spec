@@ -8,12 +8,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	6.1.4
-Release:	2
+Version:	6.1.5
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	7110a0b4b171b84850d346f4fe648172
+# Source0-md5:	61b53395e14a11dd7e7715b50261b9eb
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
