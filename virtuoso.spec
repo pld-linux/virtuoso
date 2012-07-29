@@ -6,15 +6,17 @@
 #
 %bcond_without	vad
 #
+%define	snap	rc2
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	6.1.5
-Release:	1
+Version:	6.1.6
+Release:	0.%{snap}.1
 License:	GPL v2
 Group:		Applications
-Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	61b53395e14a11dd7e7715b50261b9eb
+# Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
+Source0:	%{name}-opensource-%{version}-%{snap}.tar.xz
+# Source0-md5:	76db413df81bf01471c7d9bf0ed1e6f0
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
