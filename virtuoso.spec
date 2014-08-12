@@ -9,12 +9,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	6.1.8
+Version:	7.1.0
 Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	94ef4f93cad915f73bee547fe95db725
+# Source0-md5:	ada52a9c9852c1eeb94631ba41eaca49
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
@@ -133,6 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 
 ln -s . $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins
 
+mv $RPM_BUILD_ROOT%{_datadir}/virtuoso/doc vdoc
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -168,10 +170,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so
 
 %if %{with vad}
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/creolewiki.so
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/mediawiki.so
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wikiv.so
-
 %files vad
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}
@@ -180,5 +178,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc docsrc/html_virt/*.{html,css,ico}
+%doc vdoc/*
 %endif
