@@ -1,5 +1,20 @@
 --- virtuoso-opensource-7.1.0/configure.in~	2014-02-18 02:33:14.000000000 +0900
 +++ virtuoso-opensource-7.1.0/configure.in	2015-08-27 16:48:19.438554242 +0900
+@@ -1405,13 +1405,12 @@
+     old_CFLAGS="$CFLAGS"
+     save_LIBS="$LIBS"
+     old_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
++    WBXML2_CFLAGS="`pkg-config --cflags libwbxml2`"
+     case "$with_wbxml2" in
+ 	yes)
+-	   WBXML2_CFLAGS=""
+ 	   WBXML2_LDFLAGS="-lwbxml2"
+ 	   ;;
+ 	*)
+-	   WBXML2_CFLAGS="-I$with_wbxml2/include"
+ 	   WBXML2_LDFLAGS="-L$with_wbxml2/lib -lwbxml2"
+ 	   LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$with_wbxml2/lib"
+ 	   export LD_LIBRARY_PATH
 @@ -1425,7 +1425,7 @@
  #include <stdio.h>
  #include <stdlib.h>
