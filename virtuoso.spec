@@ -5,16 +5,17 @@
 #	- many unpackaged files which should be removed or included in subpackages
 #
 %bcond_without	vad
+%bcond_with	wbxml	# build wbxml2 plugin (broken with libwbxml2 >= 0.11)
 #
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	7.1.0
-Release:	4
+Version:	7.2.1
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	ada52a9c9852c1eeb94631ba41eaca49
+# Source0-md5:	e4cb5500fae5a41209f9f00074cbff87
 Patch0:		libwbxml.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
@@ -24,7 +25,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gawk
 BuildRequires:	libtool
-BuildRequires:	libwbxml-devel >= 0.11
+%{?with_wbxml:BuildRequires:	libwbxml-devel >= 0.11}
 BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
 BuildRequires:	openssl-devel
@@ -119,7 +120,7 @@ Virtuoso documentation.
 	--enable-openssl \
 	--enable-openldap \
 	--enable-imagemagick \
-	--enable-wbxml2 \
+	--%{?with_wbxml:en}%{!?with_wbxml:dis}able-wbxml2 \
 	--enable-aio \
 	--with-readline \
 	--without-internal-zlib \
@@ -170,7 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/%{name}/hosting
 %attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/im.so
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so
+%{?with_wbxml:%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so}
 
 %if %{with vad}
 %files vad
