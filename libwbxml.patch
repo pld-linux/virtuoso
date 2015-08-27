@@ -1,0 +1,11 @@
+--- virtuoso-opensource-7.1.0/configure.in~	2014-02-18 02:33:14.000000000 +0900
++++ virtuoso-opensource-7.1.0/configure.in	2015-08-27 16:48:19.438554242 +0900
+@@ -1425,7 +1425,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <wbxml.h>
++#include <wbxml/wbxml.h>
+ int
+ main ()
+ {

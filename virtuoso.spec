@@ -10,11 +10,12 @@ Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	7.1.0
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	ada52a9c9852c1eeb94631ba41eaca49
+Patch0:		libwbxml.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
@@ -23,7 +24,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gawk
 BuildRequires:	libtool
-BuildRequires:	libwbxml-devel
+BuildRequires:	libwbxml-devel >= 0.11
 BuildRequires:	libxml2-devel
 BuildRequires:	net-tools
 BuildRequires:	openssl-devel
@@ -102,6 +103,7 @@ Virtuoso documentation.
 
 %prep
 %setup -q -n %{name}-opensource-%{version}
+%patch0 -p1
 
 %build
 %{__libtoolize}
