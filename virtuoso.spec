@@ -155,6 +155,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/virtodbcu.so
 %attr(755,root,root) %{_libdir}/%{name}/virtodbcu_r.so
 
+%{_libdir}/virtuoso/hibernate
+%{_libdir}/virtuoso/jdbc-*
+%{_libdir}/virtuoso/jena*
+%{_libdir}/virtuoso/sesame
+
 %dir /var/lib/%{name}
 /var/lib/%{name}/db
 /var/lib/%{name}/vsp
