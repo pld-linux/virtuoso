@@ -6,12 +6,12 @@
 #
 %bcond_without	vad
 %bcond_with	wbxml	# build wbxml2 plugin (broken with libwbxml2 >= 0.11)
-#
+
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
 Version:	7.2.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
@@ -91,6 +91,9 @@ Hosting plugins for virtuoso.
 Summary:	VAD applications for virtuoso
 Group:		Applications
 Requires:	%{name} = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description vad
 VAD applications for virtuoso.
@@ -98,6 +101,9 @@ VAD applications for virtuoso.
 %package doc
 Summary:	Virtuoso documentation
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description doc
 Virtuoso documentation.
