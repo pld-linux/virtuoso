@@ -17,6 +17,7 @@ Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
 # Source0-md5:	e4cb5500fae5a41209f9f00074cbff87
 Patch0:		libwbxml.patch
+Patch1:		imagemagick7.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
@@ -111,6 +112,7 @@ Virtuoso documentation.
 %prep
 %setup -q -n %{name}-opensource-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}

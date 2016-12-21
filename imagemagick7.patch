@@ -1,0 +1,31 @@
+--- virtuoso-opensource-7.2.1/configure.in.orig	2016-12-21 09:10:29.000000000 +0100
++++ virtuoso-opensource-7.2.1/configure.in	2016-12-21 09:18:19.783118520 +0100
+@@ -1335,7 +1335,7 @@
+ 
+ if test "x$with_im" != "xno"
+ then
+-    AC_PATH_PROG(IM_CONFIG, Wand-config, notfound, ["$with_im/bin:$PATH"])
++    AC_PATH_PROG(IM_CONFIG, MagickWand-config, notfound, ["$with_im/bin:$PATH"])
+ 
+     if test "x$IM_CONFIG" = "xnotfound"
+     then
+@@ -1367,7 +1367,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
+-#include <wand/magick-wand.h>
++#include <MagickWand/MagickWand.h>
+ MagickWand *magick_wand;
+ int
+ main ()
+--- virtuoso-opensource-7.2.1/binsrc/samples/image_magick/im.c~	2015-03-12 03:09:01.000000000 +0100
++++ virtuoso-opensource-7.2.1/binsrc/samples/image_magick/im.c	2016-12-21 09:20:43.071615860 +0100
+@@ -37,7 +37,7 @@
+ #include <string.h>
+ #include <time.h>
+ 
+-#include <wand/magick-wand.h>
++#include <MagickWand/MagickWand.h>
+ 
+ #define IM_VERSION "0.6"
+ 
