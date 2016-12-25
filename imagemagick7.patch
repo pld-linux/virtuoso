@@ -29,3 +29,203 @@
  
  #define IM_VERSION "0.6"
  
+@@ -310,7 +310,6 @@
+ 	{
+       switch (op)
+ 		{
+-        case 'A': strg_value = MagickGetImageAttribute (env.ime_magick_wand, key); break;
+         case 'F': strg_value = MagickGetImageFormat (env.ime_magick_wand); break;
+         case 'I': strg_value = MagickIdentifyImage (env.ime_magick_wand); break;
+         case 'W': ul_value = MagickGetImageWidth (env.ime_magick_wand); break;
+@@ -347,9 +346,6 @@
+   return res;
+ }
+ 
+-caddr_t
+-bif_im_GetImageFileAttribute(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+-{ return bif_im_get_impl (qst, err, args, 1, 'A', "IM GetImageFileAttribute"); }
+ caddr_t bif_im_GetImageFileFormat(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+ { return bif_im_get_impl (qst, err, args, 1, 'F', "IM GetImageFileFormat"); }
+ caddr_t bif_im_GetImageFileIdentify(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+@@ -362,8 +358,6 @@
+ { return bif_im_get_impl (qst, err, args, 1, 'H', "IM GetImageFileHeight"); }
+ caddr_t bif_im_GetImageFileWH(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+ { return bif_im_get_impl (qst, err, args, 1, '2', "IM GetImageFileWH"); }
+-caddr_t bif_im_GetImageBlobAttribute(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+-{ return bif_im_get_impl (qst, err, args, 0, 'A', "IM GetImageBlobAttribute"); }
+ caddr_t bif_im_GetImageBlobFormat(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+ { return bif_im_get_impl (qst, err, args, 0, 'F', "IM GetImageBlobFormat"); }
+ caddr_t bif_im_GetImageBlobIdentify(caddr_t * qst, caddr_t * err, state_slot_t ** args)
+@@ -409,7 +403,6 @@
+   long y = bif_long_arg (qst, args, 5, "IM CropAndResizeImageBlob");
+   long h_size = bif_long_arg (qst, args, 6, "IM ResizeImageBlob");
+   long v_size = bif_long_arg (qst, args, 7, "IM ResizeImageBlob");
+-  double blur = bif_double_arg (qst, args, 8, "IM ResizeImageBlob");
+   long filter = bif_long_arg (qst, args, 9, "IM ResizeImageBlob");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -421,7 +414,7 @@
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+       MagickCropImage (env.ime_magick_wand, width, height, x, y);
+-      MagickResizeImage (env.ime_magick_wand, h_size, v_size, filter, blur);
++      MagickResizeImage (env.ime_magick_wand, h_size, v_size, filter);
+   }
+   res = im_write (&env);
+   im_leave (&env);
+@@ -490,7 +483,6 @@
+   im_env_t env;
+   double v_size = bif_double_arg (qst, args, 1, "IM ResampleImageFile");
+   double h_size = bif_double_arg (qst, args, 2, "IM ResampleImageFile");
+-  double blur = bif_double_arg (qst, args, 3, "IM ResampleImageFile");
+   long filter = bif_long_arg (qst, args, 4, "IM ResampleImageFile");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -500,7 +492,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-      MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++      MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   im_write (&env);
+   im_leave (&env);
+@@ -513,7 +505,6 @@
+   caddr_t res;
+   double v_size = bif_double_arg (qst, args, 1, "IM ResampleImageFileToBlob");
+   double h_size = bif_double_arg (qst, args, 2, "IM ResampleImageFileToBlob");
+-  double blur = bif_double_arg (qst, args, 3, "IM ResampleImageFileToBlob");
+   long filter = bif_long_arg (qst, args, 4, "IM ResampleImageFileToBlob");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -523,7 +514,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++    MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   res = im_write (&env);
+   im_leave (&env);
+@@ -536,7 +527,6 @@
+   caddr_t res;
+   double v_size = bif_double_arg (qst, args, 2, "IM ResampleImageBlob");
+   double h_size = bif_double_arg (qst, args, 3, "IM ResampleImageBlob");
+-  double blur = bif_double_arg (qst, args, 4, "IM ResampleImageBlob");
+   long filter = bif_long_arg (qst, args, 5, "IM ResampleImageBlob");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -547,7 +537,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++    MagickResampleImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   res = im_write (&env);
+   im_leave (&env);
+@@ -560,7 +550,6 @@
+   im_env_t env;
+   long v_size = bif_long_arg (qst, args, 1, "IM ResizeImageFile");
+   long h_size = bif_long_arg (qst, args, 2, "IM ResizeImageFile");
+-  double blur = bif_double_arg (qst, args, 3, "IM ResizeImageFile");
+   long filter = bif_long_arg (qst, args, 4, "IM ResizeImageFile");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -570,7 +559,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   im_write (&env);
+   im_leave (&env);
+@@ -583,7 +572,6 @@
+   caddr_t res;
+   long v_size = bif_long_arg (qst, args, 1, "IM ResizeImageFileToBlob");
+   long h_size = bif_long_arg (qst, args, 2, "IM ResizeImageFileToBlob");
+-  double blur = bif_double_arg (qst, args, 3, "IM ResizeImageFileToBlob");
+   long filter = bif_long_arg (qst, args, 4, "IM ResizeImageFileToBlob");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -593,7 +581,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   res = im_write (&env);
+   im_leave (&env);
+@@ -606,7 +594,6 @@
+   caddr_t res;
+   long v_size = bif_long_arg (qst, args, 2, "IM ResizeImageBlob");
+   long h_size = bif_long_arg (qst, args, 3, "IM ResizeImageBlob");
+-  double blur = bif_double_arg (qst, args, 4, "IM ResizeImageBlob");
+   long filter = bif_long_arg (qst, args, 5, "IM ResizeImageBlob");
+   if (filter < 0 || filter > 15)
+     filter = PointFilter;
+@@ -617,7 +604,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,blur);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+   }
+   res = im_write (&env);
+   im_leave (&env);
+@@ -636,7 +623,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,1.0);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+     MagickProfileImage (env.ime_magick_wand, "*", NULL, 0);
+   }
+   im_write (&env);
+@@ -659,7 +646,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+   {
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,1.0);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+     MagickProfileImage (env.ime_magick_wand, "*", NULL, 0);
+   }
+   res = im_write (&env);
+@@ -683,7 +670,7 @@
+   MagickResetIterator (env.ime_magick_wand);
+   while (MagickNextImage (env.ime_magick_wand) != MagickFalse)
+ 		{
+-    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter,1.0);
++    MagickResizeImage (env.ime_magick_wand,v_size, h_size,filter);
+     MagickProfileImage (env.ime_magick_wand, "*", NULL, 0);
+ 		}
+   res = im_write (&env);
+@@ -734,8 +721,8 @@
+           v_size = MagickGetImageHeight (env.ime_magick_wand);
+           if ((256 < h_size) || (256 < v_size))
+             continue;
+-          MagickResizeImage (env.ime_magick_wand, h_size/2, v_size/2, BoxFilter, 1.0);
+-          if (MagickFalse == MagickCompositeImage (env.ime_target_magick_wand, env.ime_magick_wand, OverCompositeOp, (image_ctr & 1) * 128, (image_ctr & 2) * 64))
++          MagickResizeImage (env.ime_magick_wand, h_size/2, v_size/2, BoxFilter);
++          if (MagickFalse == MagickCompositeImage (env.ime_target_magick_wand, env.ime_magick_wand, OverCompositeOp, MagickTrue, (image_ctr & 1) * 128, (image_ctr & 2) * 64))
+             im_leave_with_error (&env, "22023", "IM001", "Can not composite image");
+         }
+       im_reset_read (&env);
+@@ -893,7 +880,6 @@
+   bif_define ("IM ResampleImageFile", bif_im_ResampleImageFile);
+   bif_define ("IM RotateImageFile", bif_im_RotateImageFile);
+   bif_define ("IM CropImageFile", bif_im_CropImageFile);
+-  bif_define ("IM GetImageFileAttribute", bif_im_GetImageFileAttribute);
+   bif_define ("IM GetImageFileFormat", bif_im_GetImageFileFormat);
+   bif_define ("IM GetImageFileIdentify", bif_im_GetImageFileIdentify);
+   bif_define ("IM GetImageBlobIdentify", bif_im_GetImageBlobIdentify);
+@@ -908,7 +894,6 @@
+   bif_define ("IM ResampleImageFileToBlob", bif_im_ResampleImageFileToBlob);
+   bif_define ("IM RotateImageFileToBlob", bif_im_RotateImageFileToBlob);
+   bif_define ("IM CropImageFileToBlob", bif_im_CropImageFileToBlob);
+-  bif_define ("IM GetImageBlobAttribute", bif_im_GetImageBlobAttribute);
+   bif_define ("IM GetImageBlobFormat", bif_im_GetImageBlobFormat);
+   bif_define ("IM GetImageBlobWidth", bif_im_GetImageBlobWidth);
+   bif_define ("IM GetImageBlobHeight", bif_im_GetImageBlobHeight);
