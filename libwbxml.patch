@@ -1,5 +1,5 @@
---- virtuoso-opensource-7.1.0/configure.in~	2014-02-18 02:33:14.000000000 +0900
-+++ virtuoso-opensource-7.1.0/configure.in	2015-08-27 16:48:19.438554242 +0900
+--- virtuoso-opensource-7.1.0/configure.ac~	2014-02-18 02:33:14.000000000 +0900
++++ virtuoso-opensource-7.1.0/configure.ac	2015-08-27 16:48:19.438554242 +0900
 @@ -1405,13 +1405,12 @@
      old_CFLAGS="$CFLAGS"
      save_LIBS="$LIBS"

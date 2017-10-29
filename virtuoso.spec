@@ -10,12 +10,12 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	7.2.1
-Release:	7
+Version:	7.2.4.2
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	e4cb5500fae5a41209f9f00074cbff87
+# Source0-md5:	11b081934ab4698f0f341e1b410fc4fe
 Patch0:		libwbxml.patch
 Patch1:		imagemagick7.patch
 URL:		http://virtuoso.openlinksw.com/

@@ -1,5 +1,5 @@
---- virtuoso-opensource-7.2.1/configure.in.orig	2016-12-21 09:10:29.000000000 +0100
-+++ virtuoso-opensource-7.2.1/configure.in	2016-12-21 09:18:19.783118520 +0100
+--- virtuoso-opensource-7.2.1/configure.ac.orig	2016-12-21 09:10:29.000000000 +0100
++++ virtuoso-opensource-7.2.1/configure.ac	2016-12-21 09:18:19.783118520 +0100
 @@ -1335,7 +1335,7 @@
  
  if test "x$with_im" != "xno"
