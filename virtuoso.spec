@@ -10,14 +10,15 @@
 Summary:	OpenLink Virtuoso Database System
 Summary(pl.UTF-8):	System baz danych OpenLink Virtuoso
 Name:		virtuoso
-Version:	7.2.4.2
-Release:	4
+Version:	7.2.5
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://downloads.sourceforge.net/virtuoso/%{name}-opensource-%{version}.tar.gz
-# Source0-md5:	11b081934ab4698f0f341e1b410fc4fe
+# Source0-md5:	fb23ada91ae39dd3cb2fc4b45d99ceac
 Patch0:		libwbxml.patch
-Patch1:		imagemagick7.patch
+
+Patch2:		openssl.patch
 URL:		http://virtuoso.openlinksw.com/
 BuildRequires:	ImageMagick-devel
 BuildRequires:	autoconf
@@ -112,7 +113,8 @@ Virtuoso documentation.
 %prep
 %setup -q -n %{name}-opensource-%{version}
 %patch0 -p1
-%patch1 -p1
+
+%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -133,7 +135,8 @@ Virtuoso documentation.
 	--with-readline \
 	--without-internal-zlib \
 	--with-pthreads \
-	--disable-static
+	--disable-static \
+	--disable-silent-rules
 
 %{__make} -j1
 
@@ -181,9 +184,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins-hosting
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/%{name}/hosting
-%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/im.so
+%dir %{_libdir}/virtuoso/virtuoso/hosting
+%attr(755,root,root) %{_libdir}/virtuoso/virtuoso/hosting/creolewiki.so
+%attr(755,root,root) %{_libdir}/virtuoso/virtuoso/hosting/mediawiki.so
+%attr(755,root,root) %{_libdir}/virtuoso/virtuoso/hosting/wikiv.so
 %{?with_wbxml:%attr(755,root,root) %{_libdir}/%{name}/%{name}/hosting/wbxml2.so}
 
 %if %{with vad}
