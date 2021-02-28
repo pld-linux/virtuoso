@@ -93,9 +93,7 @@ Hosting plugins for virtuoso.
 Summary:	VAD applications for virtuoso
 Group:		Applications
 Requires:	%{name} = %{version}-%{release}
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description vad
 VAD applications for virtuoso.
@@ -103,9 +101,7 @@ VAD applications for virtuoso.
 %package doc
 Summary:	Virtuoso documentation
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description doc
 Virtuoso documentation.
