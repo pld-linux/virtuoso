@@ -108,9 +108,9 @@ Virtuoso documentation.
 
 %prep
 %setup -q -n %{name}-opensource-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
-%patch2 -p1
+%patch -P2 -p1
 
 %build
 %{__libtoolize}
