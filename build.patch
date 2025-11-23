@@ -1,0 +1,11 @@
+--- virtuoso-opensource-7.2.16/libsrc/Wi/mtwrite.c.org	2025-11-23 22:41:17.266665421 +0100
++++ virtuoso-opensource-7.2.16/libsrc/Wi/mtwrite.c	2025-11-23 22:41:42.397124466 +0100
+@@ -622,7 +622,7 @@ iq_aio (io_queue_t * iq)
+       it_map_t * itm = IT_DP_MAP (buf->bd_tree, buf->bd_page);
+       if (AIO_NATIVE == c_use_aio)
+ 	{
+-	  rc = aio_suspend (&list[inx], 1, NULL);
++	  rc = aio_suspend ((const struct aiocb * const *)&list[inx], 1, NULL);
+ 	  if (rc) GPF_T1 ("aio_suspend returns error");
+ 	  rc = aio_return (list[inx]);
+ 	  if (rc != PAGE_SZ) GPF_T1 ("aio_return error");
